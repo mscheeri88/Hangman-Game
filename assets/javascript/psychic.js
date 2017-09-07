@@ -8,6 +8,8 @@ var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
 console.log(computerGuess);
 var guessedLetters = []; //allows multiple functions to use this variable (global)
 
+
+
 function reset(){
     userGuess = [];
     guessRemain = 9;
@@ -19,30 +21,37 @@ function reset(){
 document.onkeyup = function(event) {
 
 
-var userGuess = event.key;
-    console.log(userGuess);    
 
-    guessedLetters.push(userGuess);
+var noGuess = guessedLetters.indexOf(userGuess);
+var userGuess = event.key;
+    console.log(userGuess);  
     console.log(guessedLetters);
 
             
             if (userGuess == computerGuess){
                 wins++;
-                // reset();
-            } else {
+                reset();
+            };
+            
+            if (userGuess !== computerGuess && noGuess == -1){
                 guessRemain --;
-            }
+                guessedLetters.push(userGuess);
+            };
+            // } else {
+            //     guessRemain --;
+
+            // }
             
             if (guessRemain === 0){
                     losses++;
                     reset();                    
-            }   
+            };  
 
            
             
             var html =
-            "<p>wins: " + wins + "</p>" +
-            "<p>losses: " + losses + "</p>" +
+            "<p>Wins: " + wins + "</p>" +
+            "<p>Losses: " + losses + "</p>" +
             "<p>Remaining Guesses: " + guessRemain + "</p>"+
             "<p>User Guesses: " + guessedLetters  + "</p>";
             
